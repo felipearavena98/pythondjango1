@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Actualizar Perro
+{% endblock %}
+{% block content %}
+    {% load static %}
+        <link rel="stylesheet" href="static/core/css/style.css">
+<h1 id=titTabla>Formulario de actualizar empresa</h1>
+{%if mensaje%}
+<div class="alert alert-success" role="alert">
+    Actualizacion exitosa.
+</div>
+{%endif%}
+<div id=divForm>
+<form method="POST">                    
+    {%csrf_token%}
+        <label for="rutEmpresa">Rut empresa:</label>
+        <div class=form-row style="padding-bottom: 10px">
+                <div class="col">
+                <select class="form-control" name="rutEmpresa">
+                    {%for e in empresas%}
+                        {%if e.rutEmpresa == emp.rutEmpresa%}
+                            <option selected>{{e.rutEmpresa}}</option>
+                        {%else%}
+                            <option>{{e.rutEmpresa}}</option>
+                        {%endif%}
+                    {%endfor%}
+                </select>
+                </div>
+                <div class="">
+                <input class="btn btn-success" name="btnAccion" type="submit" value="Buscar" formnovalidate/>
+                </div>
+        </div>
+        <div class="form-group">
+                <label for="nombre">Direccion:</label>
+                <input minlength="0" maxlength="100" class="form-control" type="text" name="direccion" value="{{emp.direccion}}" required/>
+        </div>
+        <div class="form-group">
+                <label for="raza">Razon social:</label>
+                <input minlength="0" maxlength="100" class="form-control" type="text" name="razonSocial" value="{{emp.razonSocial}}" required/>
+        </div>
+        <div class="form-group">
+                <label for="direccion">Correo:</label>
+                <input minlength="4" maxlength="50" class="form-control" type="email" name="correo" value="{{emp.correo}}" required/>
+        </div>
+        <div class=form-group>
+                <label for="edad">Telefono:</label>
+                <input minlength="8" maxlength="9" class="form-control" type="tel" name="telefono" value="{{emp.telefono}}" required/>
+            </div>
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="btnAccion" class="btn btn-primary" value="Modificar">
+                <input type="reset" class="btn btn-dark" value="Limpiar">
+            </td>
+        </tr>
+    </table>
+</form>
+<br>
+</div>
+{%endblock%}

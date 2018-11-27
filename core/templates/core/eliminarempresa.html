@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Eliminar empresa
+{% endblock %}
+{% block content %}
+    {% load static %}
+            <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <body>
+        <h1 id=titTabla>Eliminar empresa</h1>
+        {%if respuesta%}
+        <div class="alert alert-success" role="alert">
+            Registro eliminado exitosamente.
+        </div>
+        {%endif%}
+        <form method="POST">
+            {%csrf_token%}
+            <div id=divForm>
+            Seleccione rut de empresa a eliminar:
+            <select class="custom-select" name="rutEmpresa">
+                {%for e in empresas%}
+                <option>{{e.rutEmpresa}}</option>
+                {%endfor%}
+            </select>
+            <center style="padding: 10px">
+                <input class="btn btn-danger" type="submit" value="Eliminar">
+            </center>
+        </div>
+        </form>
+        <br>
+    </body>
+{% endblock %}

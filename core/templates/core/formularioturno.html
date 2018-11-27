@@ -1,0 +1,98 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Formulario de turnos
+{% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="static/core/css/style.css">
+<link rel="stylesheet" href="static/core/css/estilonav.css">
+
+
+<h1 id=titTabla class="display-4">Formulario ingreso turno</h1>
+<div id=divForm style="width: 800px; margin: 0 auto;">
+    <div id="mapa" style="width: 700px; height: 500px; margin: 0 auto;"></div>
+    <br>
+
+    <script>
+        var divMapa = document.getElementById('mapa');
+        navigator.geolocation.getCurrentPosition(fn_ok, fn_mal);
+        function fn_mal() { }
+        function fn_ok(rta) {
+        var lat = rta.coords.latitude;
+        var lon = rta.coords.longitude;
+
+        var gLatLon = new google.maps.LatLng(lat, lon);
+        var objConfig = {
+            zoom: 17,
+            center: gLatLon,
+            mapTypeControl: false
+        }
+
+        var objConfigMarker = {
+            position: gLatLon,
+            map: gMapa,
+            title: "Usted está aquí"
+        }
+
+        var gMapa = new google.maps.Map(divMapa, objConfig);
+        var gMarker = new google.maps.Marker(objConfigMarker);
+
+        gMarker.setMap(gMapa);
+        }
+    </script>
+    
+    {%if respuesta%}
+    <div class="alert alert-success" role="alert">
+        Guardado exitoso.
+    </div>
+    {%endif%}
+
+    <button onclick="getLocation()">Mostrar Coordenadas</button>
+
+  <p id="latln"></p>
+
+  <script>
+    var x = document.getElementById("latln");
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        x.innerHTML = "Tu navegador no soporta la geolocalización.";
+      }
+    }
+
+    function showPosition(position) {
+      x.innerHTML = "Latitud: " + position.coords.latitude + "<br>Longitud: " + position.coords.longitude;
+      document.getElementById("txtLat").value = position.coords.latitude;
+      document.getElementById("txtLon").value = position.coords.longitude;
+    }
+  </script>
+  <form method="POST">
+    {%csrf_token%}
+
+    <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input class="form-control" type="date" name="fecha" id="fecha" required>
+    </div>
+    <div class="form-group">
+        <label for="rut">RUT Colaborador:</label>
+        <input class="form-control" type="number" name="rut" id="rut" required>
+    </div>
+    <div class="form-control">
+        <label for="cbRegistro">Registro turno:</label>
+        <select class="form-control" name="cbRegistro" required>
+            <option value="inicioTurno">Inicio Turno</option>
+            <option value="finTurno">Fin Turno</option>
+        </select>
+    </div>
+    <input type="hidden" id="txtLat" name="txtLat">
+    <input type="hidden" id="txtLon" name="txtLon">
+    <br>
+    <button type="submit">Grabar Turno</button>
+  </form>
+</div>    
+
+
+
+{%endblock%}

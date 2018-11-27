@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Formulario de perros
+{% endblock %}
+{% block content %}
+{% load static %}
+
+    <link rel="stylesheet" href="static/core/css/style.css">
+    <h1 id=titTabla>Formulario ingreso de colaborador</h1>
+    {%if respuesta%}
+    <div class="alert alert-success" role="alert">
+        Guardado exitoso.
+    </div>
+    {%endif%}
+        <form method="POST">
+            <div id=divForm>
+                <div class="form-group" >
+                        {%csrf_token%}
+                        <label for="rutColaborador">Rut:</label>
+                        <input minlength="8" maxlength="9" class="form-control" type="tel" name="rut" id="rut" required/>
+                        <small id="rutHelp" class="form-text text-muted">Sin puntos ni guiones. Si termina en k reemplace por un 0.</small>
+                    </div>
+                <div class="form-group">
+                        <label for="direccion">Nombre Completo:</label>
+                        <input minlength="0" maxlength="150" class="form-control" type="text" name="nombreCompleto" id="nombreCompleto" required>
+                </div>
+                <div class="form-group">
+                        <label for="direccion">Sexo:</label>
+                        <select class="form-control" name="sexo" required>
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="Hombre">Hombre</option>
+                                <option value="Mujer">Mujer</option>
+                                <option value="Otro">Otro</option>  
+                        </select>              
+                </div>
+                <div class="form-group">
+                        <label for="direccion">Fecha nacimiento:</label>
+                        <input class="form-control" type="date" name="fechaNacimiento" id="fechaNacimiento" required/>
+                </div>
+                <div class="form-group">
+                        <label for="direccion">Direccion:</label>
+                        <input minlength="0" maxlength="100" class="form-control" type="text" name="direccion" id="direccion" required>
+                </div>
+                <div class="form-group">
+                        <label for="direccion">Telefono:</label>
+                        <input minlength="8" maxlength="9" class="form-control" type="tel" name="telefono" id="telefono" required/>
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Grabar">
+                <input type="reset" class="btn btn-dark" value="Limpiar">
+                
+        </form>
+        
+        <br>
+{% endblock %}

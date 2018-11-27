@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Formulario de insumos
+{% endblock %}
+{% block content %}
+{% load static %}
+
+            <link rel="stylesheet" href="static/core/css/style.css">
+            <link rel="stylesheet" href="static/core/css/estilonav.css">
+
+    <h1 id=titTabla class="display-4">Formulario ingreso de insumos</h1>
+    {%if respuesta%}
+    <div class="alert alert-success" role="alert">
+        Guardado exitoso.
+    </div>
+    {%endif%}
+        <form method="POST">
+            {%csrf_token%}
+            <div id=divForm style="width: 800px; margin: 0 auto;">
+                <div class="form-group">
+                        <label for="nombre">ID Producto:</label>
+                        <input minlength="1" class="form-control" type="number" name="idProducto" id="idProducto" required>
+                </div>
+                <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input minlength="1" maxlength="50" class="form-control" type="text" name="nombre" id="nombre" required>
+                </div>
+                <div class="form-group">
+                            <label for="stock">Stock:</label>
+                            <input class="form-control" type="number" name="stock" id="stock" required/>
+                </div>
+                <div class=form-control>
+                            <label for="rutEmpresa">Rut Empresa:</label>
+                            <select class="form-control" name="rutEmpresa" required>
+                                <option value="" selected>Seleccione</option>
+                                    {% for e in empresa %}
+                                        <option value="{{e.rutEmpresa}}">{{e.razonSocial}}</option>
+                                    {% endfor %}
+                            </select>
+                </div>
+
+                    <td colspan="2">
+                        <input type="submit" class="btn btn-primary" value="Grabar">
+                        <input type="reset" class="btn btn-dark" value="Limpiar" formnovalidate>
+                    </td>
+                </div>
+            </div>
+            <br>
+        </form>
+        
+        <br>
+{% endblock %}

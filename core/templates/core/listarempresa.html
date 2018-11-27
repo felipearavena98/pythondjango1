@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Listar empresas
+{% endblock %}
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="static/core/css/style.css">
+    <h1 id="titTabla">Listado de empresas</h1>
+    <div id=divListar class="table-responsive">
+        <table class="table table-striped table-light table-bordered table-hover ">
+            <thead class="table-info">
+                <tr>
+                <th>Rut empresa</th>
+                <th>Direccion</th>
+                <th>Razon social</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+            </tr>
+            </thead>
+            {%for e in empresas%}
+            <tr>
+                <td>{{e.rutEmpresa}}</td>
+                <td>{{e.direccion}}</td>
+                <td>{{e.razonSocial}}</td>
+                <td>{{e.correo}}</td>
+                <td>{{e.telefono}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+{%endblock%}

@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Formulario de insumos
+{% endblock %}
+{% block content %}
+{% load static %}
+
+
+<link rel="stylesheet" href="static/core/css/style.css">
+<link rel="stylesheet" href="static/core/css/estilonav.css">
+
+
+<h1 id=titTabla class="display-4">Formulario de actualizar insumos</h1>
+{%if mensaje%}
+<div class="alert alert-success" role="alert">
+    Actualizacion exitosa.
+</div>
+{%endif%}
+
+<form method="POST">
+    <div id=divForm>
+        <div class="form-group" >
+        {%csrf_token%}
+            <label for="idProducto">ID Producto:</label>
+            <div class=form-row style="padding-bottom: 10px">
+                <div class="col">
+                    <select class="form-control" name="idProducto">
+                        {%for i in insumos%}
+                            {% if i.idProducto == ins.idProducto%}
+                                <option value="{{ins.idProducto}}">{{ins.idProducto}}</option>
+                            {%else%}
+                                <option value="{{i.idProducto}}">{{i.idProducto}}</option>
+                            {%endif%}
+                        {%endfor%}
+                    </select>
+                </div>
+                <input class="btn btn-success" name="btnAccion" type="submit" value="Buscar" formnovalidate/>                        
+            </div>
+        <div class="form-group">
+                    <label for="nombre">Nombre Producto::</label>
+                    <input class="form-control" type="text" name="nombre" value="{{ins.nombre}}" required/>
+        </div>
+        <div class="form-group">
+                    <label for="stock">Stock:</label>
+                    <input class="form-control" type="number" name="stock" value="{{ins.stock}}" required>
+        </div>
+        <div class=form-group>
+            <label for="rutEmpresa">RUT Empresa:</label>
+            <select class="form-control" name="rutEmpresa" required>
+                <option value="" disabled selected>Seleccione</option>
+                    {% for e in empresas %}
+                        <option value="{{e.rutEmpresa}}">{{e.razonSocial}}</option>
+                    {% endfor %}
+                </select>
+        </div>
+        
+            <input type="submit" name="btnAccion" class="btn btn-primary" value="Modificar">
+            <input type="reset" class="btn btn-dark" value="Limpiar">
+        </div>
+    </div>
+    <br>
+</form>
+
+{%endblock%}

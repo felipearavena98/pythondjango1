@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Eliminar colaborador
+{% endblock %}
+{% block content %}
+    {% load static %}
+            <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <body>
+        <h1 id=titTabla>Eliminar colaborador</h1>
+        {%if respuesta%}
+        <div class="alert alert-success" role="alert">
+            Registro eliminado exitosamente.
+        </div>
+        {%endif%}
+        <form method="POST">
+            {%csrf_token%}
+            <div id=divForm>
+            Seleccione rut de colaborador a eliminar:
+            <select class="custom-select" name="rut">
+                {%for c in colaboradores%}
+                <option>{{c.rut}}</option>
+                {%endfor%}
+            </select>
+            <center style="padding: 10px">
+                <input class="btn btn-danger" type="submit" value="Eliminar">
+            </center>
+        </div>
+        </form>
+        <br>
+    </body>
+{% endblock %}

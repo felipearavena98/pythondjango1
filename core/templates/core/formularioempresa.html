@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Formulario de perros
+{% endblock %}
+{% block content %}
+{% load static %}
+
+    <link rel="stylesheet" href="static/core/css/style.css">
+    <h1 id=titTabla>Formulario ingreso de empresa</h1>
+    {%if respuesta%}
+    <div class="alert alert-success" role="alert">
+        Guardado exitoso.
+    </div>
+    {%endif%}
+        <form method="POST">
+            <div id=divForm>
+                <div class="form-group" >
+                        {%csrf_token%}
+                        <label for="rutEmpresa">Rut empresa:</label>
+                        <input min="0" max="999999999"  class="form-control" type="number" name="rutEmpresa" id="rutEmpresa" required>
+                        <!--<small id="emailHelp" class="form-text text-muted">Mayor que 0.</small>-->
+                </div>
+                <div class="form-group">
+                        <label for="direccion">Direccion:</label>
+                        <input minlength="0" maxlength="100" class="form-control" type="text" name="direccion" id="direccion" required>
+                </div>
+                <div class="form-group">
+                        <label for="direccion">Razon social:</label>
+                        <input minlength="0" maxlength="100" class="form-control" type="text" name="razonSocial" id="razonSocial" required>
+                </div>
+                <div class="form-group">
+                        <label for="direccion">Correo:</label>
+                        <input minlength="4" maxlength="50" class="form-control" type="email" name="correo" id="correo" required/>
+                </div>
+                <div class="form-group">
+                        <label for="direccion">Telefono:</label>
+                        <input minlength="8" maxlength="9" class="form-control" type="tel" name="telefono" id="telefono" required/>
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Grabar">
+                <input type="reset" class="btn btn-dark" value="Limpiar">
+                
+        </form>
+        
+        <br>
+{% endblock %}

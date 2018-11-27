@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+{% block title %}
+Actualizar Perro
+{% endblock %}
+{% block content %}
+    {% load static %}
+        <link rel="stylesheet" href="static/core/css/style.css">
+<h1 id=titTabla>Formulario de actualizar colaborador</h1>
+{%if mensaje%}
+<div class="alert alert-success" role="alert">
+    Actualizacion exitosa.
+</div>
+{%endif%}
+<div id=divForm>
+<form method="POST">                    
+    {%csrf_token%}
+        <label for="rutEmpresa">Rut:</label>
+        <div class=form-row style="padding-bottom: 10px">
+                <div class="col">
+                <select class="form-control" name="rut">
+                    {%for c in colaboradores%}
+                        {%if c.rut == col.rut%}
+                            <option selected>{{c.rut}}</option>
+                        {%else%}
+                            <option>{{c.rut}}</option>
+                        {%endif%}
+                    {%endfor%}
+                </select>
+                </div>
+                <div class="">
+                <input class="btn btn-success" name="btnAccion" type="submit" value="Buscar" formnovalidate/>
+                </div>
+        </div>
+        <div class="form-group">
+                <label for="nombre">Nombre completo:</label>
+                <input minlength="0" maxlength="100" class="form-control" type="text" name="nombreCompleto" value="{{col.nombreCompleto}}" required/>
+        </div>
+        <div class="form-group">
+                <label for="raza">Sexo:</label>
+                <select class="form-control" name="sexo" required>
+                        <option value="{{col.sexo}}" selected>{{col.sexo}}</option>
+                        {%if col.sexo == "Hombre"%}
+                            <option value="Mujer">Mujer</option>
+                            <option value="Otro">Otro</option>  
+                        {%endif%}
+                        {%if col.sexo == "Mujer"%}
+                            <option value="Hombre">Hombre</option>
+                            <option value="Otro">Otro</option>  
+                        {%endif%}
+                        {%if col.sexo == "Otro"%}
+                            <option value="Hombre">Hombre</option>
+                            <option value="Mujer">Mujer</option>  
+                        {%endif%}                        
+                </select>      
+        </div>
+        <div class="form-group">
+                <label for="fechaNacimiento">Fecha nacimiento:</label>
+                <input minlength="4" maxlength="50" class="form-control" type="date" name="fechaNacimiento" value="{{col.fechaNacimiento}}" required/>
+            </div>
+        <div class=form-group>
+                <label for="edad">Direccion:</label>
+                <input minlength="0" maxlength="100" class="form-control" type="text" name="direccion" value="{{col.direccion}}" required>
+            </div>   
+        <div class=form-group>
+                <label for="edad">Telefono:</label>
+                <input minlength="8" maxlength="9" class="form-control" type="tel" name="telefono" value="{{col.telefono}}" required/>
+            </div>
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="btnAccion" class="btn btn-primary" value="Modificar">
+                <input type="reset" class="btn btn-dark" value="Limpiar">
+            </td>
+        </tr>
+    </table>
+</form>
+<br>
+</div>
+{%endblock%}

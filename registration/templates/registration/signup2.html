@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Registro de Usuario{% endblock %}
+{% block content %}
+
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary"><a href="{% url 'signup' %}">Colaborador</a></button>
+  <button type="button" class="btn btn-secondary"><a href="{% url 'signup2' %}">Empresa</a></button>
+</div>
+
+
+
+<style>.errorlist{color:red;} label{display:none}</style>
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto mb-5">
+        <form action="" method="post">{% csrf_token %}
+          <h3 class="mb-4">Registro</h3>
+          {{form.as_p}}
+          <p><input type="submit" class="btn btn-primary btn-block" value="Confirmar"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
