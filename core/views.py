@@ -28,7 +28,6 @@ class HomePageView(TemplateView):
 class SamplePageView(TemplateView):
     template_name = "core/sample.html"
 
-@method_decorator(staff_member_required, name='dispatch')
 def formularioEmpresa(request):
     resp = False
     if request.POST:
@@ -48,7 +47,6 @@ def formularioEmpresa(request):
         resp = True
     return render(request, 'core/formularioempresa.html', {'respuesta': resp})
 
-@method_decorator(staff_member_required, name='dispatch')
 def actualizarEmpresa(request):
     em = Empresa.objects.all()
     mensaje = False
@@ -75,7 +73,7 @@ def actualizarEmpresa(request):
             return render(request, 'core/actualizarempresa.html', {'empresas': em, 'mensaje': mensaje})
     return render(request, 'core/actualizarempresa.html', {'empresas': em})
 
-@method_decorator(staff_member_required, name='dispatch')
+
 def eliminarEmpresa(request):
     em = Empresa.objects.all()
     resp = False
@@ -86,12 +84,11 @@ def eliminarEmpresa(request):
         resp = True
     return render(request, 'core/eliminarempresa.html', {'empresas': em, 'respuesta': resp})
 
-@method_decorator(staff_member_required, name='dispatch')
+
 def listarEmpresa(request):
     em = Empresa.objects.all()
     return render(request, 'core/listarempresa.html', {'empresas': em})
 
-@method_decorator(staff_member_required, name='dispatch')
 def formularioColaborador(request):
     resp = False
     if request.POST:
@@ -113,7 +110,7 @@ def formularioColaborador(request):
         resp = True
     return render(request, 'core/formulariocolaborador.html', {'respuesta': resp})
 
-@method_decorator(staff_member_required, name='dispatch')
+
 def actualizarColaborador(request):
     co = Colaborador.objects.all()
     mensaje = False
@@ -142,7 +139,7 @@ def actualizarColaborador(request):
             return render(request, 'core/actualizarcolaborador.html', {'colaboradores': co, 'mensaje': mensaje})
     return render(request, 'core/actualizarcolaborador.html', {'colaboradores': co})
 
-@method_decorator(staff_member_required, name='dispatch')
+
 def eliminarColaborador(request):
     co = Colaborador.objects.all()
     resp = False
@@ -153,12 +150,11 @@ def eliminarColaborador(request):
         resp = True
     return render(request, 'core/eliminarcolaborador.html', {'colaboradores': co, 'respuesta': resp})
 
-@method_decorator(staff_member_required, name='dispatch')
+
 def listarColaborador(request):
     co = Colaborador.objects.all()
     return render(request, 'core/listarcolaborador.html', {'colaboradores': co})
 
-@method_decorator(staff_member_required, name='dispatch')
 def formularioTurno(request):
     resp = False
     if request.POST:
@@ -179,7 +175,7 @@ def formularioTurno(request):
         resp=True
     return render(request, 'core/formularioturno.html',{'respuesta':resp})
 
-@method_decorator(staff_member_required, name='dispatch')
+
 def formularioInsumo(request):
     emp = Empresa.objects.all()
     resp = False
@@ -199,12 +195,11 @@ def formularioInsumo(request):
         resp = True
     return render(request, 'core/formularioinsumo.html', {'respuesta': resp, 'empresa': emp})
 
-@method_decorator(staff_member_required, name='dispatch')
+
 def listarInsumo(request):
     ins = Insumo.objects.all()
     return render(request, 'core/listarinsumo.html', {'insumos': ins})
 
-@method_decorator(staff_member_required, name='dispatch')
 def eliminarInsumo(request):
     ins = Insumo.objects.all()
     resp = False
@@ -215,7 +210,7 @@ def eliminarInsumo(request):
         resp = True
     return render(request, 'core/eliminarinsumo.html', {'insumos': ins, 'respuesta': resp})
 
-@method_decorator(staff_member_required, name='dispatch')
+
 def actualizarInsumo(request):
     emp = Empresa.objects.all()
     insu = Insumo.objects.all()
@@ -245,7 +240,6 @@ def actualizarInsumo(request):
             return render(request, 'core/actualizarinsumo.html', {'mensaje': mensaje, 'empresa': emp})
     return render(request, 'core/actualizarinsumo.html', {'mensaje': mensaje,'insumos':insu, 'empresa': emp})
 
-@method_decorator(staff_member_required, name='dispatch')
 class ReportePersonasPDF(View):
 
     def cabecera(self, pdf):
